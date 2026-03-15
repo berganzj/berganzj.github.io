@@ -8,6 +8,7 @@ pip install fastai
 
 fastai 2.8.6 is installed. You also have fastbook installed (the companion to the course). You're all set.
 
+##CODE
 from fastai.vision.all import *
 path = Path("dataset")dls = DataBlock(    
 blocks=(ImageBlock, CategoryBlock),    
