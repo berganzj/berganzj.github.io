@@ -22,11 +22,14 @@ dls.show_batch()  # Preview your data
 3. Train — two lines:
 
 learn = vision_learner(dls, resnet18, metrics=accuracy)learn.fine_tune(5)
+
 That's it. fast.ai handles the training loop, CUDA, learning rate, etc.
 
 4. Check results:
-5. 
-learn.show_results()interp = ClassificationInterpretation.from_learner(learn)interp.plot_confusion_matrix()
+
+learn.show_results()
+interp = ClassificationInterpretation.from_learner(learn)
+interp.plot_confusion_matrix()
 
 7. Save the model:
 
