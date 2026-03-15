@@ -6,26 +6,36 @@ Your pipeline, the fast.ai way
 pip install fastai
 2. Data loading — fast.ai's DataBlock:
 
+fastai 2.8.6 is installed. You also have fastbook installed (the companion to the course). You're all set.
 
-from fastai.vision.all import *path = Path("dataset")dls = DataBlock(    blocks=(ImageBlock, CategoryBlock),    get_items=get_image_files,    splitter=GrandparentSplitter(train_name="train", valid_name="val"),    get_y=parent_label,  # Folder name = label    item_tfms=Resize(224),    batch_tfms=aug_transforms()).dataloaders(path, bs=32)dls.show_batch()  # Preview your data
+from fastai.vision.all import *
+path = Path("dataset")dls = DataBlock(    
+blocks=(ImageBlock, CategoryBlock),    
+get_items=get_image_files,    
+splitter=GrandparentSplitter(train_name="train", valid_name="val"),    
+get_y=parent_label,  # Folder name = label    
+item_tfms=Resize(224),    
+batch_tfms=aug_transforms()
+).dataloaders(path, bs=32)
+dls.show_batch()  # Preview your data
+
 3. Train — two lines:
-
 
 learn = vision_learner(dls, resnet18, metrics=accuracy)learn.fine_tune(5)
 That's it. fast.ai handles the training loop, CUDA, learning rate, etc.
 
 4. Check results:
-
-
+5. 
 learn.show_results()interp = ClassificationInterpretation.from_learner(learn)interp.plot_confusion_matrix()
-5. Save the model:
 
+7. Save the model:
 
 learn.export("action_model.pkl")
+
 6. Use the model later:
 
-
 learn_inf = load_learner("action_model.pkl")prediction = learn_inf.predict("new_image.png")print(prediction)  # ('kick', tensor(1), tensor([0.02, 0.95, 0.01, 0.02]))
+
 What about video / action recognition?
 The fast.ai book (Chapters 1–6) focuses on image classification first. This is actually the right starting point for your MVP:
 
